@@ -1,0 +1,120 @@
+//==============================================================
+// Expert Installer
+// Copyright © Miroslav Popov. All rights reserved.
+//==============================================================
+// THIS CODE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+// EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE.
+//==============================================================
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using ExpertInstaller.Interfaces;
+
+namespace ExpertInstaller.Helpers
+{
+    public class IoManager : IIoManager
+    {
+        public string CurrentDirectory
+        {
+            get { return Environment.CurrentDirectory; }
+        }
+
+        public bool FileExists(string path)
+        {
+            return File.Exists(path);
+        }
+
+        public IEnumerable<string> GetDirectories(string path)
+        {
+            try
+            {
+                return Directory.GetDirectories(path);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+
+        public IEnumerable<string> GetDirectories(string path, string searchPattern, SearchOption searchOption)
+        {
+            return Directory.GetDirectories(path, searchPattern, searchOption);
+        }
+
+        public void RunFile(string path, string arguments)
+        {
+            try
+            {
+                var process = new Process
+                {
+                    StartInfo =
+                    {
+                        FileName = path,
+                        Arguments = arguments,
+                        // ReSharper disable AssignNullToNotNullAttribute
+                        WorkingDirectory = Path.GetDirectoryName(path)
+                        // ReSharper restore AssignNullToNotNullAttribute
+                    }
+                };
+                process.Start();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        public void VisitWebLink(string linkUrl)
+        {
+            try
+            {
+                Process.Start(linkUrl);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
+        }
+
+        public IEnumerable<Process> GetRunningProcesses()
+        {
+            return Process.GetProcesses();
+        }
+
+        public bool DirectoryExists(string pathMql4)
+        {
+            return Directory.Exists(pathMql4);
+        }
+
+        public void DeleteFile(string path)
+        {
+            try
+            {
+                File.Delete(path);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
+        }
+
+        public bool CopyFile(string source, string target)
+        {
+            try
+            {
+                File.Copy(source, target);
+                return true;
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
+            return false;
+        }
+    }
+}
