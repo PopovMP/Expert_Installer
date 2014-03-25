@@ -75,7 +75,11 @@ namespace ExpertInstaller
             if (pathMql4Xp.Count > 0)
                 SetTargets(pathMql4Xp);
 
-            int count = pathMql4Dirs.Count + pathMql4Xp.Count;
+            List<string> pathMql4X86 = GetMql4DirsX86();
+            if (pathMql4X86.Count > 0)
+                SetTargets(pathMql4X86);
+
+            int count = pathMql4Dirs.Count + pathMql4Xp.Count + pathMql4X86.Count;
             view.AppendOutput(string.Format("Found {0} MT4 installations.", count));
 
             if (count == 0)
@@ -120,7 +124,15 @@ namespace ExpertInstaller
         private List<string> GetMql4DirsXp()
         {
             string pathAppData = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-            var baseDirs = ioManager.GetDirectories(pathAppData, "*", SearchOption.TopDirectoryOnly);
+            IEnumerable<string> baseDirs = ioManager.GetDirectories(pathAppData, "*", SearchOption.TopDirectoryOnly);
+            return baseDirs.Select(baseDir => Path.Combine(baseDir, "MQL4"))
+                .Where(pathMql4 => ioManager.DirectoryExists(pathMql4)).ToList();
+        }
+
+        private List<string> GetMql4DirsX86()
+        {
+            string pathAppData = ProgramFilesx86();
+            IEnumerable<string> baseDirs = ioManager.GetDirectories(pathAppData, "*", SearchOption.TopDirectoryOnly);
             return baseDirs.Select(baseDir => Path.Combine(baseDir, "MQL4"))
                 .Where(pathMql4 => ioManager.DirectoryExists(pathMql4)).ToList();
         }
@@ -154,6 +166,14 @@ namespace ExpertInstaller
             int experts = expertTargetList.Count(expertTarget => ioManager.CopyFile(expertSource, expertTarget));
             int libs = libraryTargetList.Count(libraryTarget => ioManager.CopyFile(librarySource, libraryTarget));
             return experts + libs;
+        }
+
+        private static string ProgramFilesx86()
+        {
+            if (8 == IntPtr.Size ||
+                (!String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432"))))
+                return Environment.GetEnvironmentVariable("ProgramFiles(x86)");
+            return Environment.GetEnvironmentVariable("ProgramFiles");
         }
 
         protected virtual void OnCloseRequested()
