@@ -91,8 +91,8 @@ namespace ExpertInstaller
 
         private bool CheckSourceFiles()
         {
-            expertSource = Path.Combine(ioManager.CurrentDirectory, @"Entities\" + ExpertName);
-            librarySource = Path.Combine(ioManager.CurrentDirectory, @"Entities\" + LibraryName);
+            expertSource = Path.Combine(ioManager.CurrentDirectory, ExpertName);
+            librarySource = Path.Combine(ioManager.CurrentDirectory, LibraryName);
 
             if (!ioManager.FileExists(expertSource))
             {
