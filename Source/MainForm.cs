@@ -50,7 +50,7 @@ namespace ExpertInstaller
             foreach (string terminal in terminals)
                 sb.AppendLine(terminal);
 
-            string text = string.Format("Please close all MT4 instances before continue!\r\n\r\n{0}", sb);
+            string text = string.Format("Please close all MT4 instances before continue!\r\nExpert won't be installed correctly if you leave MT4 open!\r\n\r\n{0}", sb);
             MessageBox.Show(text, "Expert Installer", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 

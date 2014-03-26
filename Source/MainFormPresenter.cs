@@ -80,17 +80,17 @@ namespace ExpertInstaller
                 SetTargets(pathMql4X86);
 
             int count = pathMql4Dirs.Count + pathMql4Xp.Count + pathMql4X86.Count;
-            view.AppendOutput(string.Format("Found {0} MT4 installations.", count));
 
             if (count == 0)
+            {
+                view.AppendOutput("No Meta Trader terminals were found.\r\nPlease click \"Installation Help\" above.");
+                view.AppendOutput(Environment.NewLine);
                 return;
+            }
 
             DeleteOldFiles();
-
             int files = CopyNewFiles();
-
-            view.AppendOutput(Environment.NewLine);
-            view.AppendOutput(string.Format("Copyed {0} files.", files));
+            view.AppendOutput(files > 0 ? "Done!" : "Expert was not installed! Please click \"Installation Help\" above.");
         }
 
         private bool CheckSourceFiles()
