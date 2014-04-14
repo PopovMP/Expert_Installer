@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting;
 using ExpertInstaller.Interfaces;
 
 namespace ExpertInstaller
@@ -67,19 +68,27 @@ namespace ExpertInstaller
             if (!CheckSourceFiles())
                 return;
 
+            int count = 0;
             List<string> pathMql4Dirs = GetMql4Dirs();
-            if (pathMql4Dirs.Count > 0)
+            if (pathMql4Dirs != null && pathMql4Dirs.Count > 0)
+            {
                 SetTargets(pathMql4Dirs);
+                count = pathMql4Dirs.Count;
+            }
 
             List<string> pathMql4Xp = GetMql4DirsXp();
-            if (pathMql4Xp.Count > 0)
+            if (pathMql4Xp != null && pathMql4Xp.Count > 0)
+            {
                 SetTargets(pathMql4Xp);
+                count += pathMql4Xp.Count;
+            }
 
             List<string> pathMql4X86 = GetMql4DirsX86();
-            if (pathMql4X86.Count > 0)
+            if (pathMql4X86 != null && pathMql4X86.Count > 0)
+            {
                 SetTargets(pathMql4X86);
-
-            int count = pathMql4Dirs.Count + pathMql4Xp.Count + pathMql4X86.Count;
+                count += pathMql4X86.Count;
+            }
 
             if (count == 0)
             {
@@ -115,7 +124,8 @@ namespace ExpertInstaller
         {
             string pathAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string pathTerminals = Path.Combine(pathAppData, @"MetaQuotes\Terminal\");
-            IEnumerable<string> baseDirs = ioManager.GetDirectories(pathTerminals);
+            string[] baseDirs = ioManager.GetDirectories(pathTerminals);
+            if(baseDirs == null || baseDirs.Length == 0) return null;
 
             return baseDirs.Select(baseDir => Path.Combine(baseDir, "MQL4"))
                 .Where(pathMql4 => ioManager.DirectoryExists(pathMql4)).ToList();
@@ -124,7 +134,9 @@ namespace ExpertInstaller
         private List<string> GetMql4DirsXp()
         {
             string pathAppData = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-            IEnumerable<string> baseDirs = ioManager.GetDirectories(pathAppData, "*", SearchOption.TopDirectoryOnly);
+            string[] baseDirs = ioManager.GetDirectories(pathAppData, "*", SearchOption.TopDirectoryOnly);
+            if(baseDirs == null || baseDirs.Length == 0) return null;
+
             return baseDirs.Select(baseDir => Path.Combine(baseDir, "MQL4"))
                 .Where(pathMql4 => ioManager.DirectoryExists(pathMql4)).ToList();
         }
@@ -132,7 +144,9 @@ namespace ExpertInstaller
         private List<string> GetMql4DirsX86()
         {
             string pathAppData = ProgramFilesx86();
-            IEnumerable<string> baseDirs = ioManager.GetDirectories(pathAppData, "*", SearchOption.TopDirectoryOnly);
+            string[] baseDirs = ioManager.GetDirectories(pathAppData, "*", SearchOption.TopDirectoryOnly);
+            if(baseDirs == null || baseDirs.Length == 0) return null;
+
             return baseDirs.Select(baseDir => Path.Combine(baseDir, "MQL4"))
                 .Where(pathMql4 => ioManager.DirectoryExists(pathMql4)).ToList();
         }

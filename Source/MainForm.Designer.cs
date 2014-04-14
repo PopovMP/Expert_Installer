@@ -39,6 +39,7 @@
             this.itmHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,14 +49,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAnnounce.Location = new System.Drawing.Point(12, 38);
             this.lblAnnounce.Name = "lblAnnounce";
-            this.lblAnnounce.Size = new System.Drawing.Size(387, 40);
+            this.lblAnnounce.Size = new System.Drawing.Size(341, 40);
             this.lblAnnounce.TabIndex = 2;
             this.lblAnnounce.Text = "Exper Installer searches MT4 terminals and installs \"MT4-FST Expert.ex4\" and \"MT4" +
     "-FST Library.dll\".";
             // 
             // btnInstall
             // 
-            this.btnInstall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnInstall.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnInstall.Location = new System.Drawing.Point(65, 192);
             this.btnInstall.Name = "btnInstall";
@@ -67,13 +67,10 @@
             // 
             // tbxOutput
             // 
-            this.tbxOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxOutput.Location = new System.Drawing.Point(15, 248);
             this.tbxOutput.Multiline = true;
             this.tbxOutput.Name = "tbxOutput";
-            this.tbxOutput.Size = new System.Drawing.Size(384, 80);
+            this.tbxOutput.Size = new System.Drawing.Size(338, 68);
             this.tbxOutput.TabIndex = 4;
             // 
             // label1
@@ -103,7 +100,7 @@
             this.itmHelp});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(414, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(368, 24);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -147,16 +144,29 @@
             this.label4.TabIndex = 12;
             this.label4.Text = "2.";
             // 
+            // btnClose
+            // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClose.Location = new System.Drawing.Point(248, 339);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(105, 35);
+            this.btnClose.TabIndex = 3;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.Close_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(414, 340);
+            this.ClientSize = new System.Drawing.Size(368, 386);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.linkMsRedist);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbxOutput);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnInstall);
             this.Controls.Add(this.lblAnnounce);
             this.Controls.Add(this.menuStrip1);
@@ -187,6 +197,7 @@
         private System.Windows.Forms.ToolStripMenuItem itmHelp;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnClose;
     }
 }
 

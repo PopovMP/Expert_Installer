@@ -28,7 +28,7 @@ namespace ExpertInstaller.Helpers
             return File.Exists(path);
         }
 
-        public IEnumerable<string> GetDirectories(string path)
+        public string[] GetDirectories(string path)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace ExpertInstaller.Helpers
             }
         }
 
-        public IEnumerable<string> GetDirectories(string path, string searchPattern, SearchOption searchOption)
+        public string[] GetDirectories(string path, string searchPattern, SearchOption searchOption)
         {
             return Directory.GetDirectories(path, searchPattern, searchOption);
         }

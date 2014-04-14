@@ -18,8 +18,8 @@ namespace ExpertInstaller.Interfaces
     {
         string CurrentDirectory { get; }
         bool FileExists(string path);
-        IEnumerable<string> GetDirectories(string path);
-        IEnumerable<string> GetDirectories(string path, string searchPattern, SearchOption searchOption);
+        string[] GetDirectories(string path);
+        string[] GetDirectories(string path, string searchPattern, SearchOption searchOption);
         void RunFile(string path, string arguments);
         void VisitWebLink(string linkUrl);
         IEnumerable<Process> GetRunningProcesses();

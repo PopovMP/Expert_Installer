@@ -9,8 +9,6 @@
 //==============================================================
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using ExpertInstaller.Interfaces;
@@ -59,14 +57,6 @@ namespace ExpertInstaller
             presenter.InstallClicked();
         }
 
-        /// <summary>
-        ///     Close the form
-        /// </summary>
-        private void Close_Click(object sender, EventArgs e)
-        {
-            presenter.CloseClicked();
-        }
-
         private void LinkMsRedist_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var control = (Control) sender;
@@ -83,6 +73,11 @@ namespace ExpertInstaller
         {
             var item = (ToolStripMenuItem) sender;
             ioManager.VisitWebLink(item.Tag.ToString());
+        }
+
+        private void Close_Click(object sender, EventArgs e)
+        {
+            presenter.CloseClicked();
         }
     }
 }
