@@ -93,5 +93,17 @@ namespace BridgeInstaller.Helpers
             }
             return false;
         }
+
+        public string ReadText(string path)
+        {
+            try
+            {
+                return File.ReadAllText(path);
+            }
+            catch (Exception)
+            {
+                return String.Empty;
+            }
+        }
     }
 }

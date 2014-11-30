@@ -25,5 +25,6 @@ namespace BridgeInstaller.Interfaces
         bool DirectoryExists(string pathMql4);
         void DeleteFile(string path);
         bool CopyFile(string source, string target);
+        string ReadText(string path);
     }
 }

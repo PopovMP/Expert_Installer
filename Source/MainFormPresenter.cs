@@ -28,6 +28,7 @@ namespace BridgeInstaller
         private readonly IIoManager ioManager;
         private readonly List<string> libraryTargetList = new List<string>();
         private readonly List<string> mqlcacheTargetList = new List<string>();
+        private readonly List<string> originList = new List<string>();
         private string expertSource;
         private string librarySource;
         private IMainForm view;
@@ -71,21 +72,21 @@ namespace BridgeInstaller
             List<string> pathMql4Dirs = GetMql4Dirs();
             if (pathMql4Dirs != null && pathMql4Dirs.Count > 0)
             {
-                SetTargets(pathMql4Dirs);
+                SetTargets(pathMql4Dirs.ToArray());
                 count = pathMql4Dirs.Count;
             }
 
             List<string> pathMql4Xp = GetMql4DirsXp();
             if (pathMql4Xp != null && pathMql4Xp.Count > 0)
             {
-                SetTargets(pathMql4Xp);
+                SetTargets(pathMql4Xp.ToArray());
                 count += pathMql4Xp.Count;
             }
 
             List<string> pathMql4X86 = GetMql4DirsX86();
             if (pathMql4X86 != null && pathMql4X86.Count > 0)
             {
-                SetTargets(pathMql4X86);
+                SetTargets(pathMql4X86.ToArray());
                 count += pathMql4X86.Count;
             }
 
@@ -98,7 +99,12 @@ namespace BridgeInstaller
 
             DeleteOldFiles();
             int files = CopyNewFiles();
-            view.AppendOutput(files > 0 ? "Done!" : "Bridge was not installed! Please click \"Installation Help\" above.");
+
+            originList.ForEach(origin => view.AppendOutput(origin + Environment.NewLine));
+
+            view.AppendOutput(files > 0
+                ? "Done!"
+                : "Bridge was not installed! Please click \"Installation Help\" above.");
         }
 
         private bool CheckSourceFiles()
@@ -124,7 +130,7 @@ namespace BridgeInstaller
             string pathAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string pathTerminals = Path.Combine(pathAppData, @"MetaQuotes\Terminal\");
             string[] baseDirs = ioManager.GetDirectories(pathTerminals);
-            if(baseDirs == null || baseDirs.Length == 0) return null;
+            if (baseDirs == null || baseDirs.Length == 0) return null;
 
             return baseDirs.Select(baseDir => Path.Combine(baseDir, "MQL4"))
                 .Where(pathMql4 => ioManager.DirectoryExists(pathMql4)).ToList();
@@ -134,7 +140,7 @@ namespace BridgeInstaller
         {
             string pathAppData = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
             string[] baseDirs = ioManager.GetDirectories(pathAppData, "*", SearchOption.TopDirectoryOnly);
-            if(baseDirs == null || baseDirs.Length == 0) return null;
+            if (baseDirs == null || baseDirs.Length == 0) return null;
 
             return baseDirs.Select(baseDir => Path.Combine(baseDir, "MQL4"))
                 .Where(pathMql4 => ioManager.DirectoryExists(pathMql4)).ToList();
@@ -144,13 +150,13 @@ namespace BridgeInstaller
         {
             string pathAppData = ProgramFilesX86();
             string[] baseDirs = ioManager.GetDirectories(pathAppData, "*", SearchOption.TopDirectoryOnly);
-            if(baseDirs == null || baseDirs.Length == 0) return null;
+            if (baseDirs == null || baseDirs.Length == 0) return null;
 
             return baseDirs.Select(baseDir => Path.Combine(baseDir, "MQL4"))
                 .Where(pathMql4 => ioManager.DirectoryExists(pathMql4)).ToList();
         }
 
-        private void SetTargets(IEnumerable<string> pathMql4Dirs)
+        private void SetTargets(string[] pathMql4Dirs)
         {
             foreach (string mql4Dir in pathMql4Dirs)
             {
@@ -160,6 +166,19 @@ namespace BridgeInstaller
                 mqlcacheTargetList.Add(Path.Combine(mql4Dir, @"Experts\mqlcache.dat"));
                 mqlcacheTargetList.Add(Path.Combine(mql4Dir, @"Libraries\mqlcache.dat"));
             }
+
+            pathMql4Dirs.ToList().ForEach(mql4 =>
+            {
+                string basePath = Directory.GetParent(mql4).FullName;
+                string originPath = Path.Combine(basePath, "origin.txt");
+                if (!ioManager.FileExists(originPath)) return;
+                string origin = ioManager.ReadText(originPath);
+                if (String.IsNullOrEmpty(origin)) return;
+                string terminal = origin.Split('\\').Last();
+                if (String.IsNullOrEmpty(terminal)) return;
+                if (!originList.Contains(terminal))
+                    originList.Add(terminal);
+            });
         }
 
         private void DeleteOldFiles()
