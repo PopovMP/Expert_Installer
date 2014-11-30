@@ -47,15 +47,16 @@
             this.lblAnnounce.Name = "lblAnnounce";
             this.lblAnnounce.Size = new System.Drawing.Size(384, 49);
             this.lblAnnounce.TabIndex = 2;
-            this.lblAnnounce.Text = "Forex Strategy Builder Professional connects to MetaTrader4 by using a special ex" +
-    "pert advisor called \"FSB-MT4 Bridge\".";
+            this.lblAnnounce.Text = "Forex Strategy Builder Professional connects to MetaTrader 4 by using a special e" +
+    "xpert advisor called \"FSB-MT4 Bridge\".";
             // 
             // btnInstall
             // 
+            this.btnInstall.Image = global::BridgeInstaller.Properties.Resources.Start;
             this.btnInstall.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnInstall.Location = new System.Drawing.Point(12, 90);
             this.btnInstall.Name = "btnInstall";
-            this.btnInstall.Size = new System.Drawing.Size(174, 42);
+            this.btnInstall.Size = new System.Drawing.Size(189, 42);
             this.btnInstall.TabIndex = 3;
             this.btnInstall.Text = "Install FSB-MT4 Bridge";
             this.btnInstall.UseVisualStyleBackColor = true;
