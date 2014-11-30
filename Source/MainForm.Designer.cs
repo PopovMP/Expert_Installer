@@ -64,7 +64,8 @@
             // 
             // tbxOutput
             // 
-            this.tbxOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbxOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxOutput.Location = new System.Drawing.Point(12, 143);
             this.tbxOutput.Multiline = true;
@@ -130,6 +131,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(400, 300);
             this.Name = "MainForm";
             this.Text = "FSB-MT4 Bridge Installer";
             this.TopMost = true;

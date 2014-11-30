@@ -17,6 +17,7 @@ namespace BridgeInstaller.Interfaces
         void SetView(IMainForm mainForm);
         void CheckWorkingTerminals();
         void InstallClicked();
+        void ProcedeSilently();
         void CloseClicked();
         event EventHandler<EventArgs> CloseRequested;
     }

@@ -63,10 +63,42 @@ namespace BridgeInstaller
             view = mainForm;
         }
 
+        public void ProcedeSilently()
+        {
+            int count = PrepareMql4Dirs();
+
+            if (count == 0)
+                return;
+
+            DeleteOldFiles();
+            CopyNewFiles();
+        }
+
         public void InstallClicked()
         {
-            if (!CheckSourceFiles())
+            int count = PrepareMql4Dirs();
+
+            if (count == 0)
+            {
+                view.AppendOutput("No Meta Trader terminals were found.\r\nPlease click \"Installation Help\" above.");
+                view.AppendOutput(Environment.NewLine);
                 return;
+            }
+
+            DeleteOldFiles();
+            int files = CopyNewFiles();
+
+            originList.ForEach(origin => view.AppendOutput(origin + Environment.NewLine));
+
+            view.AppendOutput(files > 0
+                ? "Done!"
+                : "Bridge was not installed! Please click \"Installation Help\" above.");
+        }
+
+        private int PrepareMql4Dirs()
+        {
+            if (!CheckSourceFiles())
+                return 0;
 
             int count = 0;
             List<string> pathMql4Dirs = GetMql4Dirs();
@@ -90,21 +122,7 @@ namespace BridgeInstaller
                 count += pathMql4X86.Count;
             }
 
-            if (count == 0)
-            {
-                view.AppendOutput("No Meta Trader terminals were found.\r\nPlease click \"Installation Help\" above.");
-                view.AppendOutput(Environment.NewLine);
-                return;
-            }
-
-            DeleteOldFiles();
-            int files = CopyNewFiles();
-
-            originList.ForEach(origin => view.AppendOutput(origin + Environment.NewLine));
-
-            view.AppendOutput(files > 0
-                ? "Done!"
-                : "Bridge was not installed! Please click \"Installation Help\" above.");
+            return count;
         }
 
         private bool CheckSourceFiles()

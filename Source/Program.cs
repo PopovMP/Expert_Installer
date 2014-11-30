@@ -60,7 +60,7 @@ namespace BridgeInstaller
 
             if (isIncognitoMode)
             {
-                presenter.InstallClicked();
+                presenter.ProcedeSilently();
                 CloseApplication();
             }
             else
