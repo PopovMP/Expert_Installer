@@ -12,9 +12,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using ExpertInstaller.Interfaces;
+using BridgeInstaller.Interfaces;
 
-namespace ExpertInstaller.Helpers
+namespace BridgeInstaller.Helpers
 {
     public class IoManager : IIoManager
     {
@@ -44,29 +44,6 @@ namespace ExpertInstaller.Helpers
         public string[] GetDirectories(string path, string searchPattern, SearchOption searchOption)
         {
             return Directory.GetDirectories(path, searchPattern, searchOption);
-        }
-
-        public void RunFile(string path, string arguments)
-        {
-            try
-            {
-                var process = new Process
-                {
-                    StartInfo =
-                    {
-                        FileName = path,
-                        Arguments = arguments,
-                        // ReSharper disable AssignNullToNotNullAttribute
-                        WorkingDirectory = Path.GetDirectoryName(path)
-                        // ReSharper restore AssignNullToNotNullAttribute
-                    }
-                };
-                process.Start();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
         }
 
         public void VisitWebLink(string linkUrl)

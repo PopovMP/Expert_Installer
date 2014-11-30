@@ -8,11 +8,11 @@
 // A PARTICULAR PURPOSE.
 //==============================================================
 
-namespace ExpertInstaller.Interfaces
+namespace BridgeInstaller.Interfaces
 {
     public interface IMainForm
     {
         void AppendOutput(string text);
-        void ShowTermianlsWarning(string[] terminals);
+        void ShowTerminalWarning(string[] terminals);
     }
 }

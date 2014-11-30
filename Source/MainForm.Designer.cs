@@ -49,10 +49,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAnnounce.Location = new System.Drawing.Point(12, 38);
             this.lblAnnounce.Name = "lblAnnounce";
-            this.lblAnnounce.Size = new System.Drawing.Size(341, 40);
+            this.lblAnnounce.Size = new System.Drawing.Size(341, 49);
             this.lblAnnounce.TabIndex = 2;
-            this.lblAnnounce.Text = "Exper Installer searches MT4 terminals and installs \"MT4-FST Expert.ex4\" and \"MT4" +
-    "-FST Library.dll\".";
+            this.lblAnnounce.Text = "Forex Strategy Builder Professional connects to MetaTrader4 by using a special ex" +
+    "pert advisor called \"FSB-MT4 Bridge\".";
             // 
             // btnInstall
             // 
@@ -61,7 +61,7 @@
             this.btnInstall.Name = "btnInstall";
             this.btnInstall.Size = new System.Drawing.Size(225, 35);
             this.btnInstall.TabIndex = 3;
-            this.btnInstall.Text = "Install MT4 Expert files";
+            this.btnInstall.Text = "Install FSB-MT4 Bridge";
             this.btnInstall.UseVisualStyleBackColor = true;
             this.btnInstall.Click += new System.EventHandler(this.Install_Click);
             // 
@@ -75,7 +75,7 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(62, 105);
+            this.label1.Location = new System.Drawing.Point(62, 101);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(228, 30);
             this.label1.TabIndex = 8;
@@ -84,7 +84,7 @@
             // linkMsRedist
             // 
             this.linkMsRedist.AutoSize = true;
-            this.linkMsRedist.Location = new System.Drawing.Point(62, 144);
+            this.linkMsRedist.Location = new System.Drawing.Point(62, 140);
             this.linkMsRedist.Name = "linkMsRedist";
             this.linkMsRedist.Size = new System.Drawing.Size(228, 15);
             this.linkMsRedist.TabIndex = 9;
@@ -118,7 +118,7 @@
             this.itmHelp.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.itmHelp.Name = "itmHelp";
             this.itmHelp.Size = new System.Drawing.Size(105, 20);
-            this.itmHelp.Tag = "http://forexsb.com/wiki/fsbpro/manual/expert_installer";
+            this.itmHelp.Tag = "http://forexsb.com/goto.php?tag=bridge_installer";
             this.itmHelp.Text = "Installation Help";
             this.itmHelp.Click += new System.EventHandler(this.Help_Click);
             // 
@@ -127,7 +127,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label3.Location = new System.Drawing.Point(27, 105);
+            this.label3.Location = new System.Drawing.Point(27, 101);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 30);
             this.label3.TabIndex = 12;
@@ -176,7 +176,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";
-            this.Text = "Expert Installer";
+            this.Text = "FSB-MT4 Bridge Installer";
             this.TopMost = true;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

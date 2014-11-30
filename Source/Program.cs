@@ -11,10 +11,11 @@
 using System;
 using System.Threading;
 using System.Windows.Forms;
-using ExpertInstaller.Helpers;
-using ExpertInstaller.Interfaces;
+using BridgeInstaller.Helpers;
+using BridgeInstaller.Interfaces;
+using ExpertInstaller;
 
-namespace ExpertInstaller
+namespace BridgeInstaller
 {
     internal static class Program
     {

@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace ExpertInstaller.Helpers
+namespace BridgeInstaller.Helpers
 {
     public class Container
     {

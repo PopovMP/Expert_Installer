@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
-namespace ExpertInstaller.Interfaces
+namespace BridgeInstaller.Interfaces
 {
     public interface IIoManager
     {
@@ -20,7 +20,6 @@ namespace ExpertInstaller.Interfaces
         bool FileExists(string path);
         string[] GetDirectories(string path);
         string[] GetDirectories(string path, string searchPattern, SearchOption searchOption);
-        void RunFile(string path, string arguments);
         void VisitWebLink(string linkUrl);
         IEnumerable<Process> GetRunningProcesses();
         bool DirectoryExists(string pathMql4);

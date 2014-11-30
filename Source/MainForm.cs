@@ -11,7 +11,7 @@
 using System;
 using System.Text;
 using System.Windows.Forms;
-using ExpertInstaller.Interfaces;
+using BridgeInstaller.Interfaces;
 
 namespace ExpertInstaller
 {
@@ -39,7 +39,7 @@ namespace ExpertInstaller
             tbxOutput.AppendText(text);
         }
 
-        public void ShowTermianlsWarning(string[] terminals)
+        public void ShowTerminalWarning(string[] terminals)
         {
             if (terminals.Length == 0)
                 return;
@@ -48,8 +48,8 @@ namespace ExpertInstaller
             foreach (string terminal in terminals)
                 sb.AppendLine(terminal);
 
-            string text = string.Format("Please close all MT4 instances before continue!\r\nExpert won't be installed correctly if you leave MT4 open!\r\n\r\n{0}", sb);
-            MessageBox.Show(text, "Expert Installer", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            string text = string.Format("Please close all MT4 instances before continue!\r\nFSB-MT4 Bridge won't be installed correctly if you leave MT4 open!\r\n\r\n{0}", sb);
+            MessageBox.Show(text, "Bridge Installer", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void Install_Click(object sender, EventArgs e)

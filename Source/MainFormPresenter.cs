@@ -13,16 +13,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.Remoting;
-using ExpertInstaller.Interfaces;
+using BridgeInstaller.Interfaces;
 
-namespace ExpertInstaller
+namespace BridgeInstaller
 {
     public class MainFormPresenter : IMainFormPresenter
     {
-        private const string ExpertName = "MT4-FST Expert.mq4";
-        private const string ExpertEx4 = "MT4-FST Expert.ex4";
-        private const string LibraryName = "MT4-FST Library.dll";
+        private const string ExpertName = "FSB-MT4 Bridge.mq4";
+        private const string ExpertEx4 = "FSB-MT4 Bridge.ex4";
+        private const string LibraryName = "FSB-MT4 Bridge.dll";
 
         private readonly List<string> ex4TargetList = new List<string>();
         private readonly List<string> expertTargetList = new List<string>();
@@ -48,7 +47,7 @@ namespace ExpertInstaller
                     if (!terminals.Contains(process.MainWindowTitle))
                         terminals.Add(process.MainWindowTitle);
 
-            view.ShowTermianlsWarning(terminals.ToArray());
+            view.ShowTerminalWarning(terminals.ToArray());
         }
 
         public event EventHandler<EventArgs> CloseRequested;
@@ -99,7 +98,7 @@ namespace ExpertInstaller
 
             DeleteOldFiles();
             int files = CopyNewFiles();
-            view.AppendOutput(files > 0 ? "Done!" : "Expert was not installed! Please click \"Installation Help\" above.");
+            view.AppendOutput(files > 0 ? "Done!" : "Bridge was not installed! Please click \"Installation Help\" above.");
         }
 
         private bool CheckSourceFiles()
@@ -109,12 +108,12 @@ namespace ExpertInstaller
 
             if (!ioManager.FileExists(expertSource))
             {
-                view.AppendOutput(string.Format("Could not find Expert file."));
+                view.AppendOutput(string.Format("Could not find '{0}' file.", ExpertName));
                 return false;
             }
             if (!ioManager.FileExists(librarySource))
             {
-                view.AppendOutput(string.Format("Could not find Library file."));
+                view.AppendOutput(string.Format("Could not find '{0}' file.", LibraryName));
                 return false;
             }
             return true;
@@ -143,7 +142,7 @@ namespace ExpertInstaller
 
         private List<string> GetMql4DirsX86()
         {
-            string pathAppData = ProgramFilesx86();
+            string pathAppData = ProgramFilesX86();
             string[] baseDirs = ioManager.GetDirectories(pathAppData, "*", SearchOption.TopDirectoryOnly);
             if(baseDirs == null || baseDirs.Length == 0) return null;
 
@@ -182,7 +181,7 @@ namespace ExpertInstaller
             return experts + libs;
         }
 
-        private static string ProgramFilesx86()
+        private static string ProgramFilesX86()
         {
             if (8 == IntPtr.Size ||
                 (!String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432"))))

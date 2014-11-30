@@ -8,9 +8,9 @@
     <ProjectGuid>{FE0C2E33-8AC0-4411-88C3-D7FF73FDE7B8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ExpertInstaller</RootNamespace>
-    <AssemblyName>ExpertInstaller</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <RootNamespace>BridgeInstaller</RootNamespace>
+    <AssemblyName>Bridge Installer</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ApplicationManifest>Items\app.manifest</ApplicationManifest>
@@ -94,6 +94,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
     <None Include="Items\app.manifest">
       <SubType>Designer</SubType>
     </None>

@@ -10,7 +10,7 @@
 
 using System;
 
-namespace ExpertInstaller.Interfaces
+namespace BridgeInstaller.Interfaces
 {
     public interface IMainFormPresenter
     {
