@@ -13,7 +13,7 @@ using System.Text;
 using System.Windows.Forms;
 using BridgeInstaller.Interfaces;
 
-namespace ExpertInstaller
+namespace BridgeInstaller
 {
     public partial class MainForm : Form, IMainForm
     {
@@ -55,12 +55,6 @@ namespace ExpertInstaller
         private void Install_Click(object sender, EventArgs e)
         {
             presenter.InstallClicked();
-        }
-
-        private void LinkMsRedist_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var control = (Control) sender;
-            ioManager.VisitWebLink(control.Tag.ToString());
         }
 
         private void Help_Click(object sender, EventArgs e)

@@ -13,7 +13,6 @@ using System.Threading;
 using System.Windows.Forms;
 using BridgeInstaller.Helpers;
 using BridgeInstaller.Interfaces;
-using ExpertInstaller;
 
 namespace BridgeInstaller
 {
