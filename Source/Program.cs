@@ -21,6 +21,7 @@ namespace BridgeInstaller
         private static readonly Mutex AppMutex = new Mutex(true, "{93c68028-462d-4062-b41d-c6b8b190671e}");
         private static IMainFormPresenter presenter;
         private static bool isClosedManaged;
+        private static bool isIncognitoMode;
 
         /// <summary>
         ///     The main entry point for the application.
@@ -29,6 +30,9 @@ namespace BridgeInstaller
         private static void Main()
         {
             if (!AppMutex.WaitOne(TimeSpan.Zero, true)) return;
+
+            string[] args = Environment.GetCommandLineArgs();
+            isIncognitoMode = args.Length == 2 && args[1].Contains("incognito");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -42,7 +46,10 @@ namespace BridgeInstaller
             presenter.CloseRequested += Presenter_CloseRequested;
 
             Application.Idle += Application_Idle;
-            Application.Run(container.Resolve<IMainForm>() as Form);
+            if (isIncognitoMode)
+                Application.Run();
+            else
+                Application.Run(container.Resolve<IMainForm>() as Form);
 
             CloseApplication();
         }
@@ -50,7 +57,14 @@ namespace BridgeInstaller
         private static void Application_Idle(object sender, EventArgs e)
         {
             Application.Idle -= Application_Idle;
-            presenter.CheckWorkingTerminals();
+
+            if (isIncognitoMode)
+            {
+                presenter.InstallClicked();
+                CloseApplication();
+            }
+            else
+                presenter.CheckWorkingTerminals();
         }
 
         private static void Presenter_CloseRequested(object sender, EventArgs e)
